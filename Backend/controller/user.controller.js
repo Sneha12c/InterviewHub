@@ -28,8 +28,9 @@ export const logincontroller = async function (req , res){
    try {
     const {email , password} = req.body;
     const user = await User.findOne({email}).select('+password');
+  
     if(!user){
-     res.status(400).json({errors : 'User does not exist'});
+    return res.status(400).json({errors : 'User does not exist'});
     }
     const validpassword = await user.isvalidpassword(password);
     if(!validpassword){
@@ -41,6 +42,7 @@ export const logincontroller = async function (req , res){
 
     res.status(201).json({user , token});
     } catch (error) {
+     console.log(error);
      res.status(400).json({error: error.message}); 
     }
 }
@@ -52,7 +54,7 @@ export const profilecontroller = async function (req , res) {
    }) 
 }
 
-export const logoutcontroller = async function () {
+export const logoutcontroller = async function (req , res) {
     try {
      const token = req.headers.authorization?.split(' ')[1] || req.cookies.token;
      if(!token){

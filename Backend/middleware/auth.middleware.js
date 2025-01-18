@@ -7,10 +7,9 @@ export const authuser = async function (req , res , next) {
     if(!token){
       res.status(200).send({error : "Unauthorised error"});
     }
-    redisClient.set(token , 'logout' ,'EX', 60*60*24);
     const isblacklisted = await redisClient.get(token);
     if(isblacklisted){
-     req.cookies('token' , '');
+     res.cookie('token' , '' ,{ httpOnly: true, secure: true });
      return res.status(401).send({ error : "Unauthorized user "});
     }
     const decoded = jwt.verify(token , process.env.JWT_SECRET);

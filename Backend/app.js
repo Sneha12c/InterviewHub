@@ -1,6 +1,7 @@
 import express from "express";
 import dbconnect from "./db/dbconnect.js";
 import userRoutes from "./routes/user.routes.js";
+import submitRoutes from "./routes/submit.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -13,6 +14,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use("/users" , userRoutes);
+app.use("/submit" , submitRoutes);
 
 export default app;
 

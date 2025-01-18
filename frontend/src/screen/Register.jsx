@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {userContext} from "../context/user.context.jsx";
+import {UserContext} from "../context/user.context.jsx";
 import axios from "../config/axios.js";
 
 const Register = () => {
@@ -8,7 +8,7 @@ const Register = () => {
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');
     const navigate = useNavigate();
-    const {setUser} = useContext(userContext);
+    const {setUser} = useContext(UserContext);
 
     const handlesubmit = (e)=>{
       e.preventDefault();

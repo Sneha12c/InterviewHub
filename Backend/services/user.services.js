@@ -8,6 +8,7 @@ export const createuser = async function({username , email , password}){
   const hashedpassword = await User.hashpassword(password);
 
   const user = await User.create({ username , email , password : hashedpassword});
+  await user.save();
   return user;
 }
 
